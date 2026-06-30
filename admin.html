@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>be.oxide Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="toast-container" id="toasts"></div>
+
+<div id="loginPage" class="login-page">
+  <div class="login-box">
+    <div class="login-brand">be<span>.</span>oxide</div>
+    <div class="login-sub">Admin Panel</div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" name="username" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" name="password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:0.5rem;">Login</button>
+    </form>
+  </div>
+</div>
+
+<div id="adminApp" class="admin-layout hidden">
+  <aside class="sidebar">
+    <div class="sidebar-brand">be<span>.</span>oxide</div>
+    <ul class="sidebar-nav">
+      <li><a data-page="dashboard" class="active">Dashboard</a></li>
+      <li><a data-page="collections">Collections</a></li>
+      <li><a data-page="products">Products</a></li>
+      <li><a data-page="preorders">Pre-Orders</a></li>
+      <li><a id="logoutBtn">Logout</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <div id="pageDashboard" class="page">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-sub">Overview of your drops and pre-orders</div>
+        </div>
+        <a href="/" class="btn btn-ghost" target="_blank">View Store →</a>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="card">
+        <div class="card-header">Recent Pre-Orders</div>
+        <div id="recentOrders"></div>
+      </div>
+    </div>
+
+    <div id="pageCollections" class="page hidden">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Collections</div>
+          <div class="page-sub">Manage album drops</div>
+        </div>
+        <button class="btn btn-primary" onclick="openCollectionModal()">+ New Collection</button>
+      </div>
+      <div class="card">
+        <div id="collectionsTable"></div>
+      </div>
+    </div>
+
+    <div id="pageProducts" class="page hidden">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Products</div>
+          <div class="page-sub">Tees, joggers & tank tops per collection</div>
+        </div>
+        <button class="btn btn-primary" onclick="openProductModal()">+ New Product</button>
+      </div>
+      <div class="card">
+        <div id="productsTable"></div>
+      </div>
+    </div>
+
+    <div id="pagePreorders" class="page hidden">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Pre-Orders</div>
+          <div class="page-sub">Manage customer reservations</div>
+        </div>
+        <select class="form-select" id="preorderFilter" style="width:auto;" onchange="loadPreorders()">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="fulfilled">Fulfilled</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="card">
+        <div id="preordersTable"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Modal</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
